@@ -28,19 +28,19 @@
 	tf		=	6;			% Final Time, sec
 	tspan	=	[to tf];
 	xo		=	[V;Gam;H;R];
-	[ta,xa]	=	ode23(@EqMotion,tspan,xo);
+	[ta,xa]	=	ode23('EqMotion',tspan,xo);
 	
 %	b) Oscillating Glide due to Zero Initial Flight Path Angle
 	xo		=	[V;0;H;R];
-	[tb,xb]	=	ode23(@EqMotion,tspan,xo);
+	[tb,xb]	=	ode23('EqMotion',tspan,xo);
 
 %	c) Effect of Increased Initial Velocity
 	xo		=	[1.5*V;0;H;R];
-	[tc,xc]	=	ode23(@EqMotion,tspan,xo);
+	[tc,xc]	=	ode23('EqMotion',tspan,xo);
 
 %	d) Effect of Further Increase in Initial Velocity
 	xo		=	[3*V;0;H;R];
-	[td,xd]	=	ode23(@EqMotion,tspan,xo);
+	[td,xd]	=	ode23('EqMotion',tspan,xo);
 	
 	figure
 	plot(xa(:,4),xa(:,3),xb(:,4),xb(:,3),xc(:,4),xc(:,3),xd(:,4),xd(:,3))
@@ -59,4 +59,3 @@
 	subplot(2,2,4)
 	plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
 	xlabel('Time, s'), ylabel('Range, m'), grid
-end
