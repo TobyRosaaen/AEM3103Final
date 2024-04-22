@@ -1,6 +1,9 @@
 %	Example 1.3-1 Paper Airplane Flight Path
 %	Copyright 2005 by Robert Stengel
 %	August 23, 2005
+
+%adding this 
+disp("Toby"); 
 function FinalFunc
 	global CL CD S m g rho	
 	S		=	0.017;			% Reference Area, m^2
