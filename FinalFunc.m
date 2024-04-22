@@ -2,12 +2,6 @@
 %	Copyright 2005 by Robert Stengel
 %	August 23, 2005
 
-%adding this 
- 
-function FinalFunc
-disp("Toby");
-disp("OWEN"); 
-disp('Charlie')
 	global CL CD S m g rho	
 	S		=	0.017;			% Reference Area, m^2
 	AR		=	0.86;			% Wing Aspect Ratio
@@ -66,18 +60,3 @@ disp('Charlie')
 	plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
 	xlabel('Time, s'), ylabel('Range, m'), grid
 end
-
-	function xdot = EqMotion(t,x)
-%	Fourth-Order Equations of Aircraft Motion
-    
-	global CL CD S m g rho
-	
-	V 	=	x(1);
-	Gam	=	x(2);
-	q	=	0.5 * rho * V^2;	% Dynamic Pressure, N/m^2
-	
-	xdot	=	[(-CD * q * S - m * g * sin(Gam)) / m
-				 (CL * q * S - m * g * cos(Gam)) / (m * V)
-				 V * sin(Gam)
-				 V * cos(Gam)];
-    end
