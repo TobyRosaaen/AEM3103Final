@@ -3,8 +3,9 @@
 %	August 23, 2005
 
 %adding this 
-disp("Toby"); 
+ 
 function FinalFunc
+disp("Toby");
 	global CL CD S m g rho	
 	S		=	0.017;			% Reference Area, m^2
 	AR		=	0.86;			% Wing Aspect Ratio
