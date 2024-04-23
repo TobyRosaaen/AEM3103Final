@@ -20,7 +20,138 @@
 	V		=	sqrt(2 * m * g /(rho * S * (CL * cos(Gam) - CD * sin(Gam))));
 							% Corresponding Velocity, m/s
 	Alpha	=	CL / CLa;			% Corresponding Angle of Attack, rad
-	
+
+    %Problem 1
+    H		=	2;			% Initial Height, m
+	R		=	0;			% Initial Range, m
+	to		=	0;			% Initial Time, sec
+	tf		=	6;			% Final Time, sec
+    vNominal = 3.5; %m/s
+    vHigh = 3.5 + 7.5; %m/s
+    vLow = 3.5 + 2; %MAKE SURE ITS SUPPPOSED TO BE PLUS 2
+    GamNominal = -.18; %rad
+    GamLow = -.18 - .5; %radians
+    GamHigh = -.18 + .4; %RADIANS 
+	tspan	=	[to tf]; %Time span obviously
+
+    %change v stuff
+	xoNomV	=	[vNominal;GamNominal;H;R];
+    xoLowV	=	[vLow;GamNominal;H;R];
+    xoHighV	=	[vHigh;GamNominal;H;R];
+    %Calculating numbers for V
+    [tNomV,xNomV]	=	ode23('EqMotion',tspan,xoNomV);
+    [tLowV,xLowV]	=	ode23('EqMotion',tspan,xoLowV);
+    [tHighV,xHighV]	=	ode23('EqMotion',tspan,xoHighV);
+
+    %changing gamma
+    xoNomGam = [vNominal;GamNominal;H;R]; 
+    xoLowGam = [vNominal;GamLow;H;R];
+    xoHighGam = [vNominal;GamHigh;H;R];
+
+    %calculating Numbers for varying gam
+	[tNomG,xNomG]	=	ode23('EqMotion',tspan,xoNomGam);
+    [tLowG,xLowG]	=	ode23('EqMotion',tspan,xoLowGam);
+    [tHighG,xHighG]	=	ode23('EqMotion',tspan,xoHighGam);
+
+    %plotting varying velocities
+    subplot(2,1,1); 
+    title('Hight Vs. Range with one difference'); %this needs to be changed but idk what too 
+    plot(xNomV(:,4),xNomV(:,3),'-k',xLowV(:,4),xLowV(:,3),'-g',xHighV(:,4),xHighV(:,3),'-r'); 
+    legend('Nominal Vel','Low vel','High Vel'); 
+    xlabel('Range (m)');
+    ylabel('Height (m)'); 
+    grid on; 
+    
+    %second plot stuff
+    subplot(2,1,2); 
+    plot(xNomG(:,4),xNomG(:,3),'-k',xLowG(:,4),xLowG(:,3),'-g',xHighG(:,4),xHighG(:,3),'-r'); 
+    legend('Nominal Gam','Low Gam','High Gam'); 
+    xlabel('Range (m)');
+    ylabel('Height (m)'); 
+    grid on; 
+    
+    %WHAT IS THE POINT OF GRAPHING BELOW 0 METERS ask prof
+    
+
+    %QUESTION 2 and 3: 
+    time = linspace(tspan(1),tspan(2),1000); 
+    allRanges = zeros(1000,100); 
+    allHeights = zeros(1000,100); 
+
+    GammaMin = -.18 -.5; 
+    GammaMax = -.18 + .4; 
+    vMin = 3.5 + 2; 
+    vMax = 3.5 + 7.5; 
+    figure; 
+    hold on; 
+    for i = 1:100
+        vRand = vMin + (vMax - vMin) * rand(1); 
+        GammaRand = GammaMin + (GammaMax - GammaMin) * rand(1); 
+        
+        x0 = [vRand;GammaRand;H;R]; 
+        [t,x] = ode23('EqMotion',tspan,x0); 
+        interpRange = interp1(t,x(:,4),time); 
+        interpHeight = interp1(t,x(:,3),time); 
+        allRanges(:,i) = interpRange; 
+        allHeights(:,i) = interpHeight; 
+        plot(x(:,4),x(:,3),'LineStyle','-'); 
+    end
+    xlabel("Range (m)"); 
+    ylabel("Height (m)"); 
+    grid on; 
+    title("Flight path with random vel and gamma");     
+    %QUESTION 2 NEEDS TO BE LOOKED AT AND SEE WHAT TO DO ABOUT THE GRAPH
+    %IF IT LOOKS GOOD
+    averageRange = mean(allRanges,2); 
+    averageHeights = mean(allHeights,2); 
+    p = polyfit(time,averageHeights,3); %Mabye not 3rd degree mabye change
+    heightFit = polyval(p,time); 
+    
+    p = polyfit(time,averageRange,3); 
+    rangeFit = polyval(p,time); 
+
+    figure;
+    plot(rangeFit, heightFit, '-g', 'LineWidth', 2); 
+    xlabel('Time (s)'); 
+    ylabel('Height (m)'); 
+    title('Average Height Trajectory vs. Time'); 
+    grid on;
+
+    figure;
+    plot(time, rangeFit, '-b', 'LineWidth', 2); 
+    xlabel('Time (s)'); 
+    ylabel('Range (m)'); 
+    title('Average Range Trajectory vs. Time'); 
+    grid on; 
+    
+    %last question
+    Dheight_dt = diff(averageHeights) ./ diff(time); 
+    Drange_dt = diff(averageRange) ./ diff(time); 
+
+    timeForDerivatives = time(1:end-1) + diff(time)/2; %time dilation for derivitives
+
+    % Create the plots
+    figure;
+
+    % plotting derivitives stuff
+    subplot(2,1,1);
+    plot(timeForDerivatives, Dheight_dt, '-b');
+    xlabel('Time (s)');
+    ylabel('d(Height)/d(Time) (m/s)');
+    title('Time Derivative of Height');
+    grid on;
+
+    % plotting more derivitive stuff
+    subplot(2,1,2);
+    plot(timeForDerivatives, Drange_dt, '-r');
+    xlabel('Time (s)');
+    ylabel('d(Range)/d(Time) (m/s)');
+    title('Time Derivative of Range');
+    grid on;
+
+
+
+    %{
 %	a) Equilibrium Glide at Maximum Lift/Drag Ratio
 	H		=	2;			% Initial Height, m
 	R		=	0;			% Initial Range, m
@@ -59,3 +190,4 @@
 	subplot(2,2,4)
 	plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
 	xlabel('Time, s'), ylabel('Range, m'), grid
+    %}
