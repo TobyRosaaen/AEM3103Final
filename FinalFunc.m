@@ -10,7 +10,8 @@
 	g		=	9.8;			% Gravitational acceleration, m/s^2
 	rho		=	1.225;			% Air density at Sea Level, kg/m^3	
 	CLa		=	3.141592 * AR/(1 + sqrt(1 + (AR / 2)^2));
-							% Lift-Coefficient Slope, per rad
+			
+    % Lift-Coefficient Slope, per rad
 	CDo		=	0.02;			% Zero-Lift Drag Coefficient
 	epsilon	=	1 / (3.141592 * e * AR);% Induced Drag Factor	
 	CL		=	sqrt(CDo / epsilon);	% CL for Maximum Lift/Drag Ratio
@@ -128,7 +129,8 @@
     Dheight_dt = diff(averageHeights) ./ diff(time); 
     Drange_dt = diff(averageRange) ./ diff(time); 
 
-    timeForDerivatives = time(1:end-1) + diff(time)/2; %time dilation for derivitives
+    timeForDerivatives = time(1:end-1);%time dilation for derivitives
+    
 
     % Create the plots
     figure;
