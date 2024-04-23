@@ -80,7 +80,7 @@ close all;
     
     tspan_A = to:0.1:tf;
     Animate2_int = [vHigh, GamHigh, H, R];
-
+    marker = imread('Test.png');
 
     [t_A,x_A] =	ode23('EqMotion',tspan_A,xoNomGam);
     [t2_A, x2_A] = ode23('EqMotion',tspan_A,Animate2_int);
@@ -90,23 +90,29 @@ close all;
     XMaxV = x2_A(:,4);
     XMaxG = x2_A(:,3);
     
+    figure
+    hold on
+    h = animatedline;
+    h.ColorMode = "manual";
+    h2 = animatedline;
+    h2.ColorMode = "auto";
     for i=1:length(XNomialV)
-        plot(XNomialV(i),XnomialG(i),'ok')
-        plot(XMaxV(i),XMaxG(i), 'ob')
-        hold on
-        plot(XNomialV(1:i),XnomialG(1:i),'-k')
-        plot(XMaxV(1:i),XMaxG(1:i), '-b')
+        plot(XNomialV(i),XnomialG(i),'b')
+        plot(XMaxV(i),XMaxG(i),'k')
         axis([0 25, -2 4]);
-        pause(0.01);
         xlabel('Range (m)');
         ylabel('Height (m)'); 
         grid on; 
+        addpoints(h,XNomialV(i),XnomialG(i))
+        addpoints(h2,XMaxV(i),XMaxG(i))
+        drawnow;
         
-        if i~=length(XNomialV)
-            clf
-        end
+        %if i~=length(XNomialV)
+            %clf
+        %end
     end
     hold off
+    
 
 
     %QUESTION 2 and 3: 
