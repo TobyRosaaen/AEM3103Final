@@ -2,6 +2,8 @@
 %	Copyright 2005 by Robert Stengel
 %	August 23, 2005
 
+clear all;
+close all;
 	global CL CD S m g rho	
 	S		=	0.017;			% Reference Area, m^2
 	AR		=	0.86;			% Wing Aspect Ratio
@@ -27,12 +29,12 @@
 	R		=	0;			% Initial Range, m
 	to		=	0;			% Initial Time, sec
 	tf		=	6;			% Final Time, sec
-    vNominal = 3.5; %m/s
-    vHigh = 3.5 + 7.5; %m/s
-    vLow = 3.5 + 2; %MAKE SURE ITS SUPPPOSED TO BE PLUS 2
+    vNominal = 3.55; %m/s
+    vHigh = 7.5; %m/s
+    vLow = 2 ; %m/s
     GamNominal = -.18; %rad
-    GamLow = -.18 - .5; %radians
-    GamHigh = -.18 + .4; %RADIANS 
+    GamLow = - 0.5; %radians
+    GamHigh =  0.4; %RADIANS 
 	tspan	=	[to tf]; %Time span obviously
 
     %change v stuff
@@ -55,10 +57,10 @@
     [tHighG,xHighG]	=	ode23('EqMotion',tspan,xoHighGam);
 
     %plotting varying velocities
-    subplot(2,1,1); 
-    title('Hight Vs. Range with one difference'); %this needs to be changed but idk what too 
+    subplot(2,1,1);
     plot(xNomV(:,4),xNomV(:,3),'-k',xLowV(:,4),xLowV(:,3),'-g',xHighV(:,4),xHighV(:,3),'-r'); 
-    legend('Nominal Vel','Low vel','High Vel'); 
+    title('Height Vs. Range while Varying one Parameter'); %this needs to be changed but idk what too
+    legend('Nominal Velocity','Low velocity','High Velocity'); 
     xlabel('Range (m)');
     ylabel('Height (m)'); 
     grid on; 
@@ -66,7 +68,7 @@
     %second plot stuff
     subplot(2,1,2); 
     plot(xNomG(:,4),xNomG(:,3),'-k',xLowG(:,4),xLowG(:,3),'-g',xHighG(:,4),xHighG(:,3),'-r'); 
-    legend('Nominal Gam','Low Gam','High Gam'); 
+    legend('Nominal Flight Path Angle','Low Flight Path Angle','High Flight Path Angle'); 
     xlabel('Range (m)');
     ylabel('Height (m)'); 
     grid on; 
@@ -74,15 +76,48 @@
     %WHAT IS THE POINT OF GRAPHING BELOW 0 METERS ask prof
     
 
+    %Animation
+    
+    tspan_A = to:0.1:tf;
+    Animate2_int = [vHigh, GamHigh, H, R];
+
+
+    [t_A,x_A] =	ode23('EqMotion',tspan_A,xoNomGam);
+    [t2_A, x2_A] = ode23('EqMotion',tspan_A,Animate2_int);
+
+    XNomialV = x_A(:,4);
+    XnomialG = x_A(:,3);
+    XMaxV = x2_A(:,4);
+    XMaxG = x2_A(:,3);
+    
+    for i=1:length(XNomialV)
+        plot(XNomialV(i),XnomialG(i),'ok')
+        plot(XMaxV(i),XMaxG(i), 'ob')
+        hold on
+        plot(XNomialV(1:i),XnomialG(1:i),'-k')
+        plot(XMaxV(1:i),XMaxG(1:i), '-b')
+        axis([0 25, -2 4]);
+        pause(0.01);
+        xlabel('Range (m)');
+        ylabel('Height (m)'); 
+        grid on; 
+        
+        if i~=length(XNomialV)
+            clf
+        end
+    end
+    hold off
+
+
     %QUESTION 2 and 3: 
     time = linspace(tspan(1),tspan(2),1000); 
     allRanges = zeros(1000,100); 
     allHeights = zeros(1000,100); 
 
-    GammaMin = -.18 -.5; 
-    GammaMax = -.18 + .4; 
-    vMin = 3.5 + 2; 
-    vMax = 3.5 + 7.5; 
+    GammaMin = -0.5; 
+    GammaMax = 0.4; 
+    vMin = 2; 
+    vMax = 7.5; 
     figure; 
     hold on; 
     for i = 1:100
@@ -100,9 +135,10 @@
     xlabel("Range (m)"); 
     ylabel("Height (m)"); 
     grid on; 
-    title("Flight path with random vel and gamma");     
+    title("flight path with random velocity and flight path angle");     
     %QUESTION 2 NEEDS TO BE LOOKED AT AND SEE WHAT TO DO ABOUT THE GRAPH
     %IF IT LOOKS GOOD
+    % I like the way it looks - CT
     averageRange = mean(allRanges,2); 
     averageHeights = mean(allHeights,2); 
     p = polyfit(time,averageHeights,3); %Mabye not 3rd degree mabye change
