@@ -2,7 +2,7 @@
 %	Copyright 2005 by Robert Stengel
 %	August 23, 2005
 
-clear all;
+
 close all;
 	global CL CD S m g rho	
 	S		=	0.017;			% Reference Area, m^2
@@ -79,37 +79,7 @@ close all;
 
     %Animation
     
-    tspan_A = to:0.1:tf;
-    Animate2_int = [vHigh, GamHigh, H, R];
-    marker = imread('Test.png');
 
-    [t_A,x_A] =	ode23('EqMotion',tspan_A,xoNomGam);
-    [t2_A, x2_A] = ode23('EqMotion',tspan_A,Animate2_int);
-
-    XNomialV = x_A(:,4);
-    XnomialG = x_A(:,3);
-    XMaxV = x2_A(:,4);
-    XMaxG = x2_A(:,3);
-    
-    figure
-    hold on
-    h = animatedline;
-    h.ColorMode = "manual";
-    h2 = animatedline;
-    h2.ColorMode = "auto";
-    for i=1:length(XNomialV)
-        plot(XNomialV(i),XnomialG(i),'b')
-        plot(XMaxV(i),XMaxG(i),'k')
-        axis([0 25, -2 4]);
-        xlabel('Range (m)');
-        ylabel('Height (m)'); 
-        grid on; 
-        addpoints(h,XNomialV(i),XnomialG(i))
-        addpoints(h2,XMaxV(i),XMaxG(i))
-        drawnow;
-       
-    end
-    hold off
     
 
 
@@ -191,45 +161,68 @@ close all;
     title('Time Derivative of Range');
     grid on;
 
+    tspan_A = to:0.05:tf;
+    Animate2_int = [vHigh, GamHigh, H, R];
+
+    [t_A,x_A] =	ode23('EqMotion',tspan_A,xoNomGam);
+    [t2_A, x2_A] = ode23('EqMotion',tspan_A,Animate2_int);
+
+    XNomialV = x_A(:,4);
+    XnomialG = x_A(:,3);
+    XMaxV = x2_A(:,4);
+    XMaxG = x2_A(:,3);
+    
+
+   
+    %plotting stuff
+
+    marker = imread('Test.png');
+
+    fig = figure('Position', [100, 100, 560, 420]);
+    xlim([0, max([XNomialV; XMaxV])]);
+    ylim([min([XnomialG; XMaxG]), max([XnomialG; XMaxG])]);
+    xlabel('Range (m)');
+    ylabel('Height (m)');
+    title('Animated Flight Paths');
+    grid on;
+
+    pos = get(gcf,'Position'); 
+    width2 = 560; 
+    height2 = 420; 
+    mov = zeros(height2,width2,1,length(t_A),'uint8');
+
+    hold on;
+    h1 = animatedline('Color','b','Marker','.','LineStyle','none'); % For nominal vel
+    h2 = animatedline('Color','r','Marker','.','LineStyle','none'); % For high vel
+    map = []; 
+   
+    for k = 1:length(t_A)
+    
+        addpoints(h1, XNomialV(k), XnomialG(k));
+        addpoints(h2, XMaxV(k), XMaxG(k));
+
+        if exist('imgHandle1', 'var')
+            delete(imgHandle1);
+        end
+        if exist('imgHandle2', 'var')
+            delete(imgHandle2);
+        end
+
+        imgHandle1 = image([XNomialV(k)-0.5, XNomialV(k)+0.5], [XnomialG(k)+0.5, XnomialG(k)-0.5], marker);
+        imgHandle2 = image([XMaxV(k)-0.5, XMaxV(k)+0.5], [XMaxG(k)+0.5, XMaxG(k)-0.5], marker);
+ 
+        drawnow;
+        pause(.01);
+        f = getframe(gcf); 
+        if k == 1
+            [mov(:,:,1,k), map] = rgb2ind(f.cdata,256,'nodither'); 
+        else 
+            mov(:,:,1,k) = rgb2ind(f.cdata,map,'nodither'); 
+
+        end
+    end
+    hold off;
+    imwrite(mov,map,'animate.gif','DelayTime',0,'LoopCount',inf); 
 
 
-    %{
-%	a) Equilibrium Glide at Maximum Lift/Drag Ratio
-	H		=	2;			% Initial Height, m
-	R		=	0;			% Initial Range, m
-	to		=	0;			% Initial Time, sec
-	tf		=	6;			% Final Time, sec
-	tspan	=	[to tf];
-	xo		=	[V;Gam;H;R];
-	[ta,xa]	=	ode23('EqMotion',tspan,xo);
-	
-%	b) Oscillating Glide due to Zero Initial Flight Path Angle
-	xo		=	[V;0;H;R];
-	[tb,xb]	=	ode23('EqMotion',tspan,xo);
 
-%	c) Effect of Increased Initial Velocity
-	xo		=	[1.5*V;0;H;R];
-	[tc,xc]	=	ode23('EqMotion',tspan,xo);
-
-%	d) Effect of Further Increase in Initial Velocity
-	xo		=	[3*V;0;H;R];
-	[td,xd]	=	ode23('EqMotion',tspan,xo);
-	
-	figure
-	plot(xa(:,4),xa(:,3),xb(:,4),xb(:,3),xc(:,4),xc(:,3),xd(:,4),xd(:,3))
-	xlabel('Range, m'), ylabel('Height, m'), grid
-
-	figure
-	subplot(2,2,1)
-	plot(ta,xa(:,1),tb,xb(:,1),tc,xc(:,1),td,xd(:,1))
-	xlabel('Time, s'), ylabel('Velocity, m/s'), grid
-	subplot(2,2,2)
-	plot(ta,xa(:,2),tb,xb(:,2),tc,xc(:,2),td,xd(:,2))
-	xlabel('Time, s'), ylabel('Flight Path Angle, rad'), grid
-	subplot(2,2,3)
-	plot(ta,xa(:,3),tb,xb(:,3),tc,xc(:,3),td,xd(:,3))
-	xlabel('Time, s'), ylabel('Altitude, m'), grid
-	subplot(2,2,4)
-	plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
-	xlabel('Time, s'), ylabel('Range, m'), grid
-    %}
