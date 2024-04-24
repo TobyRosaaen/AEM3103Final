@@ -2,7 +2,7 @@
   # Paper Airplane Numerical Study
   Final Project: AEM 3103 Spring 2024
 
-  - By: Toby Rosaaen, Owen Carlsen, Charlie Tripp
+  - By: Toby Rosaaen, Owen Carlson, Charlie Tripp
 
   ## Summary of Findings
   <Show the variations studied in a table>
