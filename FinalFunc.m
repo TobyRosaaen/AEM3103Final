@@ -59,7 +59,7 @@ close all;
     %plotting varying velocities
     subplot(2,1,1);
     plot(xNomV(:,4),xNomV(:,3),'-k',xLowV(:,4),xLowV(:,3),'-g',xHighV(:,4),xHighV(:,3),'-r'); 
-    title('Height Vs. Range while Varying one Parameter'); %this needs to be changed but idk what too
+    title('Height Vs. Range while Varying Velocity'); %this needs to be changed but idk what too
     legend('Nominal Velocity','Low velocity','High Velocity'); 
     xlabel('Range (m)');
     ylabel('Height (m)'); 
@@ -68,9 +68,10 @@ close all;
     %second plot stuff
     subplot(2,1,2); 
     plot(xNomG(:,4),xNomG(:,3),'-k',xLowG(:,4),xLowG(:,3),'-g',xHighG(:,4),xHighG(:,3),'-r'); 
+    title('Height Vs. Range While Varying Flight Path Angle')
     legend('Nominal Flight Path Angle','Low Flight Path Angle','High Flight Path Angle'); 
     xlabel('Range (m)');
-    ylabel('Height (m)'); 
+    ylabel('Height (m)');
     grid on; 
     
     %WHAT IS THE POINT OF GRAPHING BELOW 0 METERS ask prof
