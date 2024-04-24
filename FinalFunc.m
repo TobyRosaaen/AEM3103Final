@@ -106,10 +106,7 @@ close all;
         addpoints(h,XNomialV(i),XnomialG(i))
         addpoints(h2,XMaxV(i),XMaxG(i))
         drawnow;
-        
-        %if i~=length(XNomialV)
-            %clf
-        %end
+       
     end
     hold off
     
