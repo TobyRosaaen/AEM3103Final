@@ -77,12 +77,6 @@ close all;
     %WHAT IS THE POINT OF GRAPHING BELOW 0 METERS ask prof
     
 
-    %Animation
-    
-
-    
-
-
     %QUESTION 2 and 3: 
     time = linspace(tspan(1),tspan(2),1000); 
     allRanges = zeros(1000,100); 
@@ -178,17 +172,16 @@ close all;
 
     marker = imread('Test.png');
 
-    fig = figure('Position', [100, 100, 560, 420]);
+    f = figure('Position', [0 0 560 420]);
     xlim([0, max([XNomialV; XMaxV])]);
-    ylim([min([XnomialG; XMaxG]), max([XnomialG; XMaxG])]);
+    ylim([-2, max([XnomialG; XMaxG])]);
     xlabel('Range (m)');
     ylabel('Height (m)');
     title('Animated Flight Paths');
     grid on;
 
-    pos = get(gcf,'Position'); 
-    width2 = 560; 
-    height2 = 420; 
+    width2 = 700; 
+    height2 = 525; 
     mov = zeros(height2,width2,1,length(t_A),'uint8');
 
     hold on;
@@ -215,13 +208,14 @@ close all;
         pause(.01);
         f = getframe(gcf); 
         if k == 1
-            [mov(:,:,1,k), map] = rgb2ind(f.cdata,256,'nodither'); 
+            [mov(:,:,1,1), map] = rgb2ind(f.cdata,256,'nodither'); 
         else 
             mov(:,:,1,k) = rgb2ind(f.cdata,map,'nodither'); 
 
         end
     end
     hold off;
+
     imwrite(mov,map,'animate.gif','DelayTime',0,'LoopCount',inf); 
 
 
