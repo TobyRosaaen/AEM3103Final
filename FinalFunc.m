@@ -179,11 +179,9 @@ close all;
     ylabel('Height (m)');
     title('Animated Flight Paths');
     grid on;
+    
 
-    width2 = 700; 
-    height2 = 525; 
-    mov = zeros(height2,width2,1,length(t_A),'uint8');
-
+    
     hold on;
     h1 = animatedline('Color','b','Marker','.','LineStyle','none'); % For nominal vel
     h2 = animatedline('Color','r','Marker','.','LineStyle','none'); % For high vel
@@ -206,8 +204,11 @@ close all;
  
         drawnow;
         pause(.01);
-        f = getframe(gcf); 
+        f = getframe(gcf);  
         if k == 1
+             width2 = size(f.cdata,2); 
+             height2 = size(f.cdata,1); 
+             mov = zeros(height2,width2,1,length(t_A),'uint8');
             [mov(:,:,1,1), map] = rgb2ind(f.cdata,256,'nodither'); 
         else 
             mov(:,:,1,k) = rgb2ind(f.cdata,map,'nodither'); 
