@@ -170,7 +170,7 @@ close all;
    
     %plotting stuff
 
-    marker = imread('Test.png');
+    marker = imread('Airplane1.png');
 
     f = figure('Position', [0 0 560 420]);
     xlim([0, max([XNomialV; XMaxV])]);
