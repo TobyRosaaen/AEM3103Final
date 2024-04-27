@@ -40,4 +40,4 @@
   
   (Below are for teams of 3 people)
   ## Graphical Animation
-  <Same as the above animation, except that the moving *point* should be a 2D drawing of an airplane, drawn using CAD>
+![animate](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/dd8962b6-fc71-41e0-ad64-b5d9783edcfb)
