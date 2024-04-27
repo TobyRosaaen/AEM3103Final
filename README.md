@@ -18,10 +18,9 @@
   # Figures
 
   ## Fig. 1: Single Parameter Variation
-  <2D trajectory simulated by varying single parameter at at time>
-  <The above plot should also show the nominal trajectory>
+![HeightVsRange](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/5acdf430-79f4-4e8d-a9ce-b437a52a7778)
 
-  Briefly describe what is being shown in the figure.
+  The top graph shows the height vs range of the paper plane at a lower, nominal, and higher velocity while keeping the flight path angle constant. The bottom graph shows the height vs range of the paper plane at a lower, nominal, and higher flight path angle while keeping the velocity constant.
 
   ## Fig. 2: Monte Carlo Simulation
   <2D trajectories simulated using random sampling of parameters, overlay polynomial fit onto plot.>
