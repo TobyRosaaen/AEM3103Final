@@ -20,16 +20,17 @@
   ## Fig. 1: Single Parameter Variation
 ![HeightVsRange](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/5acdf430-79f4-4e8d-a9ce-b437a52a7778)
 
-  The top graph shows the height vs range of the paper plane at a lower, nominal, and higher velocity while keeping the flight path angle constant. The bottom graph shows the height vs range of the paper plane at a lower, nominal, and higher flight path angle while keeping the velocity constant.
+The top graph shows the height vs range of the paper plane at a lower, nominal, and higher velocity while keeping the flight path angle constant. The bottom graph shows the height vs range of the paper plane at a lower, nominal, and higher flight path angle while keeping the velocity constant.
 
   ## Fig. 2: Monte Carlo Simulation
  ![RandomParameters](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/fd4f88a4-8355-4ca1-a12e-4b7a104a6305)
 
-  Briefly describe what is being shown in the figure.
+ This figure shows 100 different trials of the paper airplane, where each trial is a randomly picked flight path angle or velocity within their range of values.
 
  ## Fig. 3: Time Derivatives
 ![Derivatives](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/343ecd16-4b2e-47ef-a5d3-414ee8e85757)
-  Briefly describe what is being shown in the figure.
+
+The top graph shows the time rate of change of the height. The bottom graph shows the time rate of change of the range. Both of these graphs are their respective velocities over time.
 
 
 
