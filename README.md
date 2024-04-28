@@ -23,21 +23,16 @@
   The top graph shows the height vs range of the paper plane at a lower, nominal, and higher velocity while keeping the flight path angle constant. The bottom graph shows the height vs range of the paper plane at a lower, nominal, and higher flight path angle while keeping the velocity constant.
 
   ## Fig. 2: Monte Carlo Simulation
-  <2D trajectories simulated using random sampling of parameters, overlay polynomial fit onto plot.>
+ ![RandomParameters](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/fd4f88a4-8355-4ca1-a12e-4b7a104a6305)
 
   Briefly describe what is being shown in the figure.
 
  ## Fig. 3: Time Derivatives
- <Time-derivative of height and range for the fitted trajectory>
-
+![Derivatives](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/343ecd16-4b2e-47ef-a5d3-414ee8e85757)
   Briefly describe what is being shown in the figure.
 
-  (Below are for teams of 2-3 people)
 
-  # Animation
-  ## Point-Mass Animation
-  <Animated GIF showing 2D trajectory for nominal and the scenario (V=7.5 m/s, Gam=+0.4 rad)>
-  
-  (Below are for teams of 3 people)
+
+ 
   ## Graphical Animation
 ![animate](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/dd8962b6-fc71-41e0-ad64-b5d9783edcfb)
