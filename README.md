@@ -9,7 +9,7 @@
   | Parameter         | Minimum   | Nominal   | Maximum | 
   |-------------------|-----------|-----------|---------|
   | Velocity          |  2 m/s    | 3.55 m/s  | 7.5 m/s |
-  | Flight Path angle | -0.5 rad  | -0.18 rad | 0.4 rad |
+  | Flight Path Angle | -0.5 rad  | -0.18 rad | 0.4 rad |
   
   
 
