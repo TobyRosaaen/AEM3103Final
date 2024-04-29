@@ -24,7 +24,8 @@
 The top graph shows the height vs range of the paper plane at a lower, nominal, and higher velocity while keeping the flight path angle constant. The bottom graph shows the height vs range of the paper plane at a lower, nominal, and higher flight path angle while keeping the velocity constant.
 
   ## Fig. 2: Monte Carlo Simulation
- ![RandomParameters](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/fd4f88a4-8355-4ca1-a12e-4b7a104a6305)
+![RandomParameters](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/6b73c09a-5194-4510-bb78-2744c3bcc5af)
+
 
  This figure shows 100 different trials of the paper airplane, where each trial is a randomly picked flight path angle or velocity within their range of values.
 
