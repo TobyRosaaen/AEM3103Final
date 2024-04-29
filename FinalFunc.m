@@ -74,8 +74,6 @@ close all;
     ylabel('Height (m)');
     grid on; 
     
-    %WHAT IS THE POINT OF GRAPHING BELOW 0 METERS ask prof
-    
 
     %QUESTION 2 and 3: 
     time = linspace(tspan(1),tspan(2),1000); 
@@ -99,21 +97,23 @@ close all;
         allRanges(:,i) = interpRange; 
         allHeights(:,i) = interpHeight; 
         plot(x(:,4),x(:,3),'LineStyle','-'); 
+        hold on
     end
     xlabel("Range (m)"); 
     ylabel("Height (m)"); 
     grid on; 
-    title("flight path with random velocity and flight path angle");     
-    %QUESTION 2 NEEDS TO BE LOOKED AT AND SEE WHAT TO DO ABOUT THE GRAPH
-    %IF IT LOOKS GOOD
-    % I like the way it looks - CT
+    title("flight path with random velocity and flight path angle"); 
+   
+
     averageRange = mean(allRanges,2); 
     averageHeights = mean(allHeights,2); 
-    p = polyfit(time,averageHeights,3); %Mabye not 3rd degree mabye change
+    p = polyfit(time,averageHeights,3); 
     heightFit = polyval(p,time); 
     
     p = polyfit(time,averageRange,3); 
     rangeFit = polyval(p,time); 
+
+   
 
     figure;
     plot(rangeFit, heightFit, '-g', 'LineWidth', 2); 
@@ -133,7 +133,7 @@ close all;
     Dheight_dt = diff(averageHeights) ./ diff(time); 
     Drange_dt = diff(averageRange) ./ diff(time); 
 
-    timeForDerivatives = time(1:end-1);%time dilation for derivitives
+    timeForDerivatives = time(1:end-1);
     
 
     % Create the plots
