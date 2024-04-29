@@ -12,8 +12,7 @@
   this was done 100 times and the outputs were fitted polynomially. The polynomial fit is the neon green line. 
 
   # Code Listing
-  EqMotion - Summarizes equations of motion into a vector
-  FinalFunc - Calculates and displays all relavent information
+  <p> EqMotion - Summarizes equations of motion into a vector <br> FinalFunc - Calculates and displays all relavent information </p>
 
   # Figures
 
@@ -33,8 +32,5 @@ The top graph shows the height vs range of the paper plane at a lower, nominal, 
 
 The top graph shows the time rate of change of the height. The bottom graph shows the time rate of change of the range. Both of these graphs are their respective velocities over time.
 
-
-
- 
   ## Graphical Animation
 ![animate](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/dd8962b6-fc71-41e0-ad64-b5d9783edcfb)
