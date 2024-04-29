@@ -12,7 +12,7 @@
   this was done 100 times and the outputs were fitted polynomially. The polynomial fit is the neon green line. 
 
   # Code Listing
-  EqMotion - Summarizes equations of motion into a vector \n
+  EqMotion - Summarizes equations of motion into a vector
   FinalFunc - Calculates and displays all relavent information
 
   # Figures
