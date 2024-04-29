@@ -6,8 +6,11 @@
 
   ## Summary of Findings
 
-  | Minimum | Nominal | Maximum | 
-  -------------------------------
+  | Parameter | Minimum | Nominal | Maximum | 
+  |-----------------------------------------|
+  | Velocity  |  2 m/s  | 3.55 m/s | 7.5 m/s |
+  
+  
 
 
   Using the function EqMotion we analyzed the flight of an paper airplane while varying mutiple flight parameters
