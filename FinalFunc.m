@@ -112,11 +112,11 @@ close all;
     
     p = polyfit(time,averageRange,3); 
     rangeFit = polyval(p,time); 
-
+    plot(rangeFit, heightFit, '-g', 'LineWidth', 2);
    
 
     figure;
-    plot(rangeFit, heightFit, '-g', 'LineWidth', 2); 
+    plot(time, heightFit, '-g', 'LineWidth', 2); 
     xlabel('Time (s)'); 
     ylabel('Height (m)'); 
     title('Average Height Trajectory vs. Time'); 
