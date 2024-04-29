@@ -6,6 +6,10 @@
 
   ## Summary of Findings
 
+  | Minimum | Nominal | Maximum | 
+  -------------------------------
+
+
   Using the function EqMotion we analyzed the flight of an paper airplane while varying mutiple flight parameters
   In the first figure the velocity and flight path angle are varied while eveything else is held constant.
   In the second figure the velcoty and flight path angle values are randomized while everything is held constant,
