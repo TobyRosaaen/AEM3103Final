@@ -25,7 +25,7 @@ The top graph shows the height vs range of the paper plane at a lower, nominal, 
 ![RandomParameters](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/6b73c09a-5194-4510-bb78-2744c3bcc5af)
 
 
- This figure shows 100 different trials of the paper airplane, where each trial is a randomly picked flight path angle or velocity within their range of values. The neon green line is the 3rd order polynomial fit
+ This figure shows 100 different trials of the paper airplane, where each trial is a randomly picked flight path angle or velocity within their range of values. The neon green line is polynomial fit
 
  ## Fig. 3: Time Derivatives
 ![Derivatives](https://github.com/TobyRosaaen/AEM3103Final/assets/167818556/343ecd16-4b2e-47ef-a5d3-414ee8e85757)
