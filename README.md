@@ -20,7 +20,7 @@
   this was done 100 times and the outputs were fitted polynomially. The polynomial fit is the neon green line. 
 
   # Code Listing
-  <p> EqMotion - Summarizes equations of motion into a vector <br> FinalFunc - Calculates and displays all relavent information </p>
+  <p> [EqMotion](EqMotion.m) - Summarizes equations of motion into a vector <br> [FinalFunc](https://github.com/TobyRosaaen/AEM3103Final/blob/main/FinalFunc.m) - Calculates and displays all relavent information </p>
 
   # Figures
 
