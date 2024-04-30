@@ -76,9 +76,9 @@ close all;
     
 
     %QUESTION 2 and 3: 
-    time = linspace(tspan(1),tspan(2),1000); 
-    allRanges = zeros(1000,100); 
-    allHeights = zeros(1000,100); 
+    allTimes = []; 
+    allRanges = []; 
+    allHeights = [];  
 
     GammaMin = -0.5; 
     GammaMax = 0.4; 
@@ -92,48 +92,48 @@ close all;
         
         x0 = [vRand;GammaRand;H;R]; 
         [t,x] = ode23('EqMotion',tspan,x0); 
-        interpRange = interp1(t,x(:,4),time); 
-        interpHeight = interp1(t,x(:,3),time); 
-        allRanges(:,i) = interpRange; 
-        allHeights(:,i) = interpHeight; 
+
+        allTimes = [allTimes; t];
+        allRanges = [allRanges; x(:,4)]; 
+        allHeights = [allHeights; x(:,3)];
         plot(x(:,4),x(:,3),'LineStyle','-'); 
-        hold on
     end
+     
     xlabel("Range (m)"); 
     ylabel("Height (m)"); 
     grid on; 
     title("flight path with random velocity and flight path angle"); 
    
 
-    averageRange = mean(allRanges,2); 
-    averageHeights = mean(allHeights,2); 
-    p = polyfit(time,averageHeights,3); 
-    heightFit = polyval(p,time); 
+     
+    pHeight = polyfit(allTimes,allHeights,3); 
+    heightFit = polyval(pHeight,allTimes); 
     
-    p = polyfit(time,averageRange,3); 
-    rangeFit = polyval(p,time); 
+    pRange = polyfit(allTimes,allRanges,3); 
+    rangeFit = polyval(pRange,allTimes); 
+
     plot(rangeFit, heightFit, '-g', 'LineWidth', 2);
    
 
     figure;
-    plot(time, heightFit, '-g', 'LineWidth', 2); 
+    plot(allTimes, heightFit, '-g', 'LineWidth', 2); 
     xlabel('Time (s)'); 
     ylabel('Height (m)'); 
     title('Average Height Trajectory vs. Time'); 
     grid on;
 
     figure;
-    plot(time, rangeFit, '-b', 'LineWidth', 2); 
+    plot(allTimes, rangeFit, '-b', 'LineWidth', 2); 
     xlabel('Time (s)'); 
     ylabel('Range (m)'); 
     title('Average Range Trajectory vs. Time'); 
     grid on; 
     
     %last question
-    Dheight_dt = diff(averageHeights) ./ diff(time); 
-    Drange_dt = diff(averageRange) ./ diff(time); 
+    Dheight_dt = diff(heightFit) ./ diff(allTimes); 
+    Drange_dt = diff(rangeFit) ./ diff(allTimes); 
 
-    timeForDerivatives = time(1:end-1);
+    timeForDerivatives = allTimes(1:end-1);
     
 
     % Create the plots
@@ -217,7 +217,7 @@ close all;
     end
     hold off;
 
-    imwrite(mov,map,'animate.gif','DelayTime',0,'LoopCount',inf); 
+   % imwrite(mov,map,'animate.gif','DelayTime',0,'LoopCount',inf); 
 
 
 
