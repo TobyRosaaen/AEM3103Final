@@ -15,7 +15,7 @@
   Using the function EqMotion we analyzed the flight of an paper airplane while varying mutiple flight parameters
   In the first figure the velocity and flight path angle are varied while eveything else is held constant.
   In the second figure the velcoty and flight path angle values are randomized while everything is held constant,
-  this was done 100 times and the outputs were fitted polynomially. The polynomial fit is the neon green line. 
+  this was done 100 times and the outputs were fitted polynomially. The 3rd order polynomial fit is the neon green line.
 
   # Code Listing
   [EqMotion](EqMotion.m) - Summarizes equations of motion into a vector <br> [FinalFunc](FinalFunc.m) - Calculates and displays all relavent information </p>
