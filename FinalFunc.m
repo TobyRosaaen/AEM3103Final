@@ -104,36 +104,39 @@ close all;
     grid on; 
     title("flight path with random velocity and flight path angle"); 
    
-
+    allTimesCol = reshape(allTimes, [], 1);
+    allRangesCol = reshape(allRanges,[],1); 
+    allHeightsCol = reshape(allHeights,[],1); 
+    fitTimes = linspace(min(allTimesCol), max(allTimesCol), 500); 
      
-    pHeight = polyfit(allTimes,allHeights,3); 
-    heightFit = polyval(pHeight,allTimes); 
+    pHeight = polyfit(allTimesCol,allHeightsCol,4); 
+    heightFit = polyval(pHeight,fitTimes); 
     
-    pRange = polyfit(allTimes,allRanges,3); 
-    rangeFit = polyval(pRange,allTimes); 
+    pRange = polyfit(allTimesCol,allRangesCol,4); 
+    rangeFit = polyval(pRange,fitTimes); 
 
     plot(rangeFit, heightFit, '-g', 'LineWidth', 2);
    
 
     figure;
-    plot(allTimes, heightFit, '-g', 'LineWidth', 2); 
+    plot(fitTimes, heightFit, '-g', 'LineWidth', 2); 
     xlabel('Time (s)'); 
     ylabel('Height (m)'); 
     title('Average Height Trajectory vs. Time'); 
     grid on;
 
     figure;
-    plot(allTimes, rangeFit, '-b', 'LineWidth', 2); 
+    plot(fitTimes, rangeFit, '-b', 'LineWidth', 2); 
     xlabel('Time (s)'); 
     ylabel('Range (m)'); 
     title('Average Range Trajectory vs. Time'); 
     grid on; 
     
     %last question
-    Dheight_dt = diff(heightFit) ./ diff(allTimes); 
-    Drange_dt = diff(rangeFit) ./ diff(allTimes); 
+    Dheight_dt = diff(heightFit) ./ diff(fitTimes); 
+    Drange_dt = diff(rangeFit) ./ diff(fitTimes); 
 
-    timeForDerivatives = allTimes(1:end-1);
+    timeForDerivatives = fitTimes(1:end-1);
     
 
     % Create the plots
